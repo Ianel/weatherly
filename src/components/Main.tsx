@@ -1,79 +1,98 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
+import { useSnapshot } from "valtio";
+import { states } from "../states";
 import Card from "./Card";
 
-const Main: React.FC = () => {
-    const datas = {
-        coord: {
-            lon: 44,
-            lat: 15,
-        },
-        weather: [
-            {
-                id: 800,
-                main: "Clear",
-                description: "clear sky",
-                icon: "01d",
-            },
-        ],
-        base: "stations",
-        main: {
-            temp: 295.95,
-            feels_like: 295.36,
-            temp_min: 295.95,
-            temp_max: 295.95,
-            pressure: 1016,
-            humidity: 41,
-            sea_level: 1016,
-            grnd_level: 854,
-        },
-        visibility: 10000,
-        wind: {
-            speed: 2.37,
-            deg: 246,
-            gust: 1.6,
-        },
-        clouds: {
-            all: 2,
-        },
-        dt: 1673686529,
-        sys: {
-            country: "YE",
-            sunrise: 1673667181,
-            sunset: 1673707936,
-        },
-        timezone: 10800,
-        id: 73331,
-        name: "Mafhaq",
-        cod: 200,
+export interface IWeatherInfos {
+    coord: {
+        lon: number;
+        lat: number;
     };
+    weather: [
+        {
+            id: number;
+            main: string;
+            description: string;
+            icon: string;
+        }
+    ];
+    base: string;
+    main: {
+        temp: number;
+        feels_like: number;
+        temp_min: number;
+        temp_max: number;
+        pressure: number;
+        humidity: number;
+        sea_level: number;
+        grnd_level: number;
+    };
+    visibility: number;
+    wind: {
+        speed: number;
+        deg: number;
+        gust: number;
+    };
+    clouds: {
+        all: number;
+    };
+    dt: number;
+    sys: {
+        country: string;
+        sunrise: number;
+        sunset: number;
+    };
+    timezone: number;
+    id: number;
+    name: string;
+    cod: number;
+}
+
+const Main: React.FC = () => {
+    const {
+        weatherInfos,
+        loading,
+        isActive,
+    }: { weatherInfos: any; loading: boolean; isActive: boolean } =
+        useSnapshot(states);
 
     return (
         <MainStyle>
-            <Card
-                title="Temperature"
-                value={datas["main"]["temp"]}
-                unit="°C"
-                logo={}
-            />
-            <Card
-                title="Humidité"
-                value={datas["main"]["humidity"]}
-                unit="%"
-                logo={}
-            />
-            <Card
-                title="Pression"
-                value={datas["main"]["pressure"]}
-                unit="%"
-                logo={}
-            />
-            <Card
-                title="Vent"
-                value={datas["wind"]["speed"]}
-                unit="%"
-                logo={}
-            />
+            {!isActive ? (
+                <h2>No results</h2>
+            ) : (
+                <>
+                    {" "}
+                    {loading ? (
+                        <div className="loader">Loading...</div>
+                    ) : (
+                        <>
+                            {" "}
+                            <Card
+                                title="Temperature"
+                                value={weatherInfos["main"]["temp"]}
+                                unit="°C"
+                            />
+                            <Card
+                                title="Humidité"
+                                value={weatherInfos["main"]["humidity"]}
+                                unit="%"
+                            />
+                            <Card
+                                title="Pression"
+                                value={weatherInfos["main"]["pressure"]}
+                                unit="Pa"
+                            />
+                            <Card
+                                title="Vent"
+                                value={weatherInfos["wind"]["speed"]}
+                                unit="km/h"
+                            />
+                        </>
+                    )}
+                </>
+            )}
         </MainStyle>
     );
 };
@@ -82,7 +101,18 @@ export default Main;
 
 const MainStyle = styled.main`
     max-width: 90vw;
+    margin: 0 auto;
     display: flex;
-    justify-content: stretch;
+    flex-wrap: wrap;
+    justify-content: center;
     align-items: stretch;
+    margin-top: 3rem;
+
+    .loader {
+        height: 50vh;
+        display: flex;
+        align-items: center;
+        font-size: 2rem;
+        font-weight: 700;
+    }
 `;
