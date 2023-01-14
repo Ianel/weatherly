@@ -4,12 +4,7 @@ import Button from "./Button";
 import Input from "./Input";
 import { colors } from "../constants/theme";
 import { states } from "../states";
-import { useSnapshot } from "valtio";
-
-type GeoCoordinates = {
-    lat: number;
-    lon: number;
-};
+import { IGeoCoordinates } from "../interfaces/IGeoCoordinates";
 
 const Header: React.FC = () => {
     const [search, setSearch] = useState("");
@@ -25,7 +20,7 @@ const Header: React.FC = () => {
         return { lat: coordinates[0]["lat"], lon: coordinates[0]["lon"] };
     };
 
-    const getWeatherData = async ({ lon, lat }: GeoCoordinates) => {
+    const getWeatherData = async ({ lon, lat }: IGeoCoordinates) => {
         const response = await fetch(
             `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${
                 import.meta.env.VITE_API_KEY

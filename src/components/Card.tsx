@@ -1,16 +1,9 @@
 import React, { ReactNode } from "react";
 import styled from "styled-components";
 import { colors } from "../constants/theme";
-import { IWeatherInfos } from "./Main";
+import { ICard } from "../interfaces/ICard";
 
-type PageProps = {
-    title: string;
-    icon?: JSX.Element | string;
-    value: string | number;
-    unit: string;
-};
-
-const Card: React.FC<PageProps> = ({ title, icon, value, unit }) => {
+const Card: React.FC<ICard> = ({ title, icon, value, unit }) => {
     return (
         <CardStyle>
             <h2>{title}</h2>

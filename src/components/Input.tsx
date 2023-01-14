@@ -1,15 +1,9 @@
 import { FormEvent } from "react";
 import styled from "styled-components";
 import { colors } from "../constants/theme";
+import { IInput } from "../interfaces/IInput";
 
-type PageProps = {
-    type: string;
-    value?: string;
-    placeholder?: string;
-    onChange?: (e: FormEvent<HTMLInputElement>) => void;
-};
-
-const Input: React.FC<PageProps> = ({ type, placeholder, value, onChange }) => {
+const Input: React.FC<IInput> = ({ type, placeholder, value, onChange }) => {
     return (
         <InputStyle
             type={type}

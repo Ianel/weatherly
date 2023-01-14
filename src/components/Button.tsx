@@ -1,4 +1,4 @@
-import React from "react";
+import React, { MutableRefObject } from "react";
 import styled from "styled-components";
 import { colors } from "../constants/theme";
 
