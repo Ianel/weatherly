@@ -60,7 +60,7 @@ const Main: React.FC = () => {
     return (
         <MainStyle>
             {!isActive ? (
-                <h2>No results</h2>
+                <h2 className="no-results">No results</h2>
             ) : (
                 <>
                     {" "}
@@ -108,7 +108,8 @@ const MainStyle = styled.main`
     align-items: stretch;
     margin-top: 3rem;
 
-    .loader {
+    .loader,
+    .no-results {
         height: 50vh;
         display: flex;
         align-items: center;
