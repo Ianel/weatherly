@@ -88,6 +88,16 @@ const HeaderStyle = styled.header`
         display: flex;
         gap: 1rem;
     }
+
+    @media screen and (max-width: 596px) {
+        margin: 2rem;
+
+        .search-container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+    }
 `;
 
 export default Header;

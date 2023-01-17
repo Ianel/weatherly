@@ -22,7 +22,7 @@ const Main: React.FC = () => {
                     {loading ? (
                         <div className="loader">Chargement...</div>
                     ) : (
-                        <>
+                        <div className="card-container">
                             {" "}
                             <Card
                                 title="Temperature"
@@ -44,7 +44,7 @@ const Main: React.FC = () => {
                                 value={weatherInfos["wind"]["speed"]}
                                 unit="km/h"
                             />
-                        </>
+                        </div>
                     )}
                 </>
             )}
@@ -58,6 +58,7 @@ const MainStyle = styled.main`
     max-width: 90vw;
     margin: 0 auto;
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     align-items: stretch;
@@ -70,5 +71,21 @@ const MainStyle = styled.main`
         align-items: center;
         font-size: 2rem;
         font-weight: 700;
+    }
+
+    .card-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin-bottom: 2rem;
+        justify-content: center;
+    }
+
+    @media screen and (max-width: 596px) {
+        margin: auto 2rem;
+
+        .card-container {
+            margin-bottom: 2rem;
+        }
     }
 `;

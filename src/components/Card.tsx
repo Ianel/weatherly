@@ -52,4 +52,9 @@ const CardStyle = styled.section`
             }
         }
     }
+
+    @media screen and (max-width: 596px) {
+        width: 300px;
+        height: 300px;
+    }
 `;
