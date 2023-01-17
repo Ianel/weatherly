@@ -5,14 +5,16 @@ import Input from "./Input";
 import { colors } from "../constants/theme";
 import { states } from "../states";
 import { IGeoCoordinates } from "../interfaces/IGeoCoordinates";
+import { API_KEY } from "../constants/key";
 
 const Header: React.FC = () => {
     const [search, setSearch] = useState("");
+    let mode = "production";
 
     const getCoordinates = async (search: string) => {
         const response = await fetch(
             `http://api.openweathermap.org/geo/1.0/direct?q=${search}&limit=5&appid=${
-                import.meta.env.VITE_API_KEY
+                mode == "development" ? import.meta.env.VITE_API_KEY : API_KEY
             }`
         );
         const coordinates = await response.json();
@@ -23,7 +25,7 @@ const Header: React.FC = () => {
     const getWeatherData = async ({ lon, lat }: IGeoCoordinates) => {
         const response = await fetch(
             `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${
-                import.meta.env.VITE_API_KEY
+                mode == "development" ? import.meta.env.VITE_API_KEY : API_KEY
             }&units=metric`
         );
         const datas = await response.json();

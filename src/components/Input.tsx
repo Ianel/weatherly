@@ -1,4 +1,3 @@
-import { FormEvent } from "react";
 import styled from "styled-components";
 import { colors } from "../constants/theme";
 import { IInput } from "../interfaces/IInput";

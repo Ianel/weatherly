@@ -15,12 +15,12 @@ const Main: React.FC = () => {
     return (
         <MainStyle>
             {!isActive ? (
-                <h2 className="no-results">No results</h2>
+                <h2 className="no-results">Aucun résultat</h2>
             ) : (
                 <>
                     {" "}
                     {loading ? (
-                        <div className="loader">Loading...</div>
+                        <div className="loader">Chargement...</div>
                     ) : (
                         <>
                             {" "}
