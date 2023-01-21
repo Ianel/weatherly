@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import styled from "styled-components";
 import Button from "./Button";
 import Input from "./Input";
@@ -9,6 +9,7 @@ import { API_KEY } from "../constants/key";
 
 const Header: React.FC = () => {
     const [search, setSearch] = useState("");
+    const [location, setLocation] = useState<GeolocationPosition>();
     let mode = "production";
 
     const getCoordinates = async (search: string) => {
@@ -42,6 +43,31 @@ const Header: React.FC = () => {
         states.weatherInfos = datas;
     };
 
+    /*  const getCurrentPosition = (
+        success: PositionCallback,
+        error: PositionErrorCallback
+    ) => {
+        navigator.geolocation.getCurrentPosition(success, error);
+    };
+
+    const success = async (position: GeolocationPosition) => {
+        const datas = await getWeatherData({
+            lat: position.coords.latitude,
+            lon: position.coords.longitude,
+        });
+
+        states.weatherInfos = datas;
+        console.log("Hiiii");
+    };
+
+    const error = (error: GeolocationPositionError) => {
+        console.log(error);
+    };
+
+    useEffect(() => {
+        getCurrentPosition(success, error);
+    }, [states]);
+ */
     return (
         <HeaderStyle>
             <h1 className="heading">Weatherly</h1>
