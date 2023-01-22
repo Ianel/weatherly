@@ -12,6 +12,13 @@ const Main: React.FC = () => {
     }: { weatherInfos: any; loading: boolean; isActive: boolean } =
         useSnapshot(states);
 
+    const capitalize = (word: string) => {
+        return `${word.split(" ")[0][0].toUpperCase()}${word.slice(
+            1,
+            word.length
+        )}`;
+    };
+
     return (
         <MainStyle>
             {!isActive ? (
@@ -22,28 +29,35 @@ const Main: React.FC = () => {
                     {loading ? (
                         <div className="loader">Chargement...</div>
                     ) : (
-                        <div className="card-container">
-                            {" "}
-                            <Card
-                                title="Temperature"
-                                value={weatherInfos["main"]["temp"]}
-                                unit="°C"
-                            />
-                            <Card
-                                title="Humidité"
-                                value={weatherInfos["main"]["humidity"]}
-                                unit="%"
-                            />
-                            <Card
-                                title="Pression"
-                                value={weatherInfos["main"]["pressure"]}
-                                unit="Pa"
-                            />
-                            <Card
-                                title="Vent"
-                                value={weatherInfos["wind"]["speed"]}
-                                unit="km/h"
-                            />
+                        <div>
+                            <h2 className="description">
+                                {capitalize(
+                                    weatherInfos["weather"][0]["description"]
+                                )}
+                            </h2>
+                            <div className="card-container">
+                                {" "}
+                                <Card
+                                    title="Temperature"
+                                    value={weatherInfos["main"]["temp"]}
+                                    unit="°C"
+                                />
+                                <Card
+                                    title="Humidité"
+                                    value={weatherInfos["main"]["humidity"]}
+                                    unit="%"
+                                />
+                                <Card
+                                    title="Pression"
+                                    value={weatherInfos["main"]["pressure"]}
+                                    unit="hPa"
+                                />
+                                <Card
+                                    title="Vent"
+                                    value={weatherInfos["wind"]["speed"]}
+                                    unit="m/s"
+                                />
+                            </div>
                         </div>
                     )}
                 </>
@@ -63,6 +77,11 @@ const MainStyle = styled.main`
     justify-content: center;
     align-items: stretch;
     margin-top: 3rem;
+    font-family: "Roboto";
+
+    .description {
+        text-align: center;
+    }
 
     .loader,
     .no-results {

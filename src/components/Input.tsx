@@ -15,8 +15,17 @@ const Input: React.FC<IInput> = ({ type, placeholder, value, onChange }) => {
 
 const InputStyle = styled.input`
     padding: 0.5rem 1rem;
-    border: 2px solid grey;
+    border: 2px solid ${colors["primary"]};
     border-radius: 0.5rem;
+
+    &:focus {
+        border: 2px solid ${colors["primary"]};
+        outline: none;
+    }
+
+    &::placeholder {
+        color: #3d3737;
+    }
 
     &:active {
         border: 2px solid ${colors["primary"]};

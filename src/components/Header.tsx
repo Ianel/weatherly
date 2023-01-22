@@ -27,7 +27,7 @@ const Header: React.FC = () => {
         const response = await fetch(
             `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${
                 mode == "development" ? import.meta.env.VITE_API_KEY : API_KEY
-            }&units=metric`
+            }&units=metric&lang=fr`
         );
         const datas = await response.json();
         return datas;
@@ -104,6 +104,7 @@ const HeaderStyle = styled.header`
     justify-content: center;
     align-items: center;
     gap: 1rem;
+    font-family: "Roboto";
 
     .heading {
         font-size: 2.5rem;
