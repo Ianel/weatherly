@@ -10,12 +10,11 @@ import { API_KEY } from "../constants/key";
 const Header: React.FC = () => {
     const [search, setSearch] = useState("");
     const [location, setLocation] = useState<GeolocationPosition>();
-    let mode = "production";
 
     const getCoordinates = async (search: string) => {
         const response = await fetch(
             `https://api.openweathermap.org/geo/1.0/direct?q=${search}&limit=5&appid=${
-                mode == "development" ? import.meta.env.VITE_API_KEY : API_KEY
+                import.meta.env.VITE_API_KEY
             }`
         );
         const coordinates = await response.json();
@@ -26,7 +25,7 @@ const Header: React.FC = () => {
     const getWeatherData = async ({ lon, lat }: IGeoCoordinates) => {
         const response = await fetch(
             `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${
-                mode == "development" ? import.meta.env.VITE_API_KEY : API_KEY
+                import.meta.env.VITE_API_KEY
             }&units=metric&lang=fr`
         );
         const datas = await response.json();
