@@ -2,9 +2,16 @@ import styled from "styled-components";
 import { colors } from "../constants/theme";
 import { IInput } from "../interfaces/IInput";
 
-const Input: React.FC<IInput> = ({ type, placeholder, value, onChange }) => {
+const Input: React.FC<IInput> = ({
+    type,
+    placeholder,
+    value,
+    onChange,
+    ref,
+}) => {
     return (
         <InputStyle
+            ref={ref}
             type={type}
             value={value}
             placeholder={placeholder}

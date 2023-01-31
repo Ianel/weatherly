@@ -1,4 +1,4 @@
-import React, { FormEvent, useEffect, useState } from "react";
+import React, { FormEvent, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Button from "./Button";
 import Input from "./Input";
@@ -9,6 +9,7 @@ import { IGeoCoordinates } from "../interfaces/IGeoCoordinates";
 const Header: React.FC = () => {
     const [search, setSearch] = useState("");
     const [location, setLocation] = useState<GeolocationPosition>();
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const getCoordinates = async (search: string) => {
         const response = await fetch(
@@ -41,6 +42,22 @@ const Header: React.FC = () => {
         states.weatherInfos = datas;
     };
 
+    const onButtonClick = async () => {
+        states.isActive = true;
+        states.loading = true;
+        await handleSearch(search);
+        states.loading = false;
+    };
+
+    useEffect(() => {
+        inputRef.current?.addEventListener("keypress", function (e) {
+            if (e.key === "Enter") {
+                //onButtonClick();
+                alert("hi");
+            }
+        });
+    }, [search]);
+
     /*  const getCurrentPosition = (
         success: PositionCallback,
         error: PositionErrorCallback
@@ -71,6 +88,7 @@ const Header: React.FC = () => {
             <h1 className="heading">Weatherly</h1>
             <div className="search-container">
                 <Input
+                    ref={inputRef}
                     type="search"
                     value={search}
                     placeholder="Entrer le nom d'une ville"
@@ -81,16 +99,7 @@ const Header: React.FC = () => {
                         setSearch(e.currentTarget.value);
                     }}
                 />
-                <Button
-                    onClick={async () => {
-                        states.isActive = true;
-                        states.loading = true;
-                        await handleSearch(search);
-                        states.loading = false;
-                    }}
-                >
-                    Rechercher
-                </Button>
+                <Button onClick={onButtonClick}>Rechercher</Button>
             </div>
         </HeaderStyle>
     );
