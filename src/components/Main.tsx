@@ -100,11 +100,23 @@ const MainStyle = styled.main`
         justify-content: center;
     }
 
+    @media screen and (max-width: 996px) {
+        .no-results,
+        .loader {
+            font-size: 1.75rem;
+        }
+    }
+
     @media screen and (max-width: 596px) {
         margin: auto 2rem;
 
         .card-container {
             margin-bottom: 2rem;
+        }
+
+        .no-results,
+        .loader {
+            font-size: 1.25rem;
         }
     }
 `;
